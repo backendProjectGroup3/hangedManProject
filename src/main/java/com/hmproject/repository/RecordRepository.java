@@ -5,40 +5,33 @@ import com.hmproject.model.records.RecordTO;
 import java.util.ArrayList;
 
 public class RecordRepository {
-    private static ArrayList<ArrayList<RecordTO>> recordPerMember;
+    private static final ArrayList<RecordTO> RECORD_LIST;
     static{
-        recordPerMember = new ArrayList<>();
-    }
-
-    private ArrayList<RecordTO> recordList;
-    private int listSeq;
-
-    public RecordRepository(){
-        this.recordList = new ArrayList<>();
-
-        RecordRepository.recordPerMember.add(recordList);
-        this.listSeq = RecordRepository.recordPerMember.size();
+        RECORD_LIST = new ArrayList<>();
     }
 
     // 기록 전체 출력
-    public ArrayList<RecordTO> select(){
-        return recordList;
+    public ArrayList<RecordTO> selectAll(){
+
+        return RECORD_LIST;
     }
 
     // 기록 한 개 선택
     public RecordTO select(int seq){
-        return recordList.get(seq);
+
+        return RECORD_LIST.get(seq - 1);
     }
 
     // 기록 입력
     public boolean insert(RecordTO rto){
 
-        return recordList.add(rto);
+        rto.setSeq(RECORD_LIST.size() + 1);
+        return RECORD_LIST.add(rto);
     }
 
     // 기록 삭제
-    public boolean delete(int seq){
-
-        return recordList.remove(seq) != null;
-    }
+//    public boolean delete(int seq){
+//
+//        return RECORD_LIST.remove(seq) != null;
+//    }
 }
