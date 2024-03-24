@@ -2,6 +2,7 @@ package game;
 
 import java.util.Random;
 import java.util.Scanner;
+//import game.HintClassName;
 
 public class Maingame {
 
@@ -36,14 +37,23 @@ public class Maingame {
                 break;
             }
 
-            System.out.print("Input letter > ");
-            String letter = scanner.next();
+            System.out.print("Input letter or 'hint' > ");
+            String input = scanner.next();
 
-            if (!letters.contains(letter)) {
+            if (input.equals("hint")) {
+
+//                HintClass.printHint();
+                continue;
+            }
+
+            char letter = input.charAt(0);
+
+            if (!letters.contains(String.valueOf(letter))) {
                 letters += letter;
             }
 
-            if (word.contains(letter)) {
+
+            if (word.contains(String.valueOf(letter))) {
                 System.out.println("Correct");
             } else {
                 System.out.println("Wrong");
