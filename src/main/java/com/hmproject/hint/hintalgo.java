@@ -1,4 +1,4 @@
-package word.hint;
+package com.hmproject.hint;
 
 public class hintalgo {
 
