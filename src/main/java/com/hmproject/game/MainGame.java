@@ -126,6 +126,7 @@ public class MainGame {
         String[] longWords = new String[words.length];
         int shortIndex = 0;
         int longIndex = 0;
+        int lives = 7;
 
         // 단어를 길이에 따라 분류
         for (String word : words) {
@@ -181,8 +182,11 @@ public class MainGame {
 
                 if (word.contains(letter)) {
                     System.out.println("Correct");
+                    design_man(lives);
                 } else {
                     System.out.println("Wrong");
+                    lives += -1;
+                    design_man(lives);
                 }
 
                 for(int i = 0; i < wArr.length; i++){
@@ -211,9 +215,74 @@ public class MainGame {
                 System.out.println("Success");
                 break;
             }
+            if (lives < 1) {
+                System.out.println("죽었습니다.");
+                break;
+            }
         }
 
         return rto;
+    }
+    public void design_man(int life) {
+        switch(life){
+            case 7:
+                System.out.println("  _______ ");
+                System.out.println("  |     | ");
+                System.out.println("  |     | ");
+                System.out.println("        | ");
+                System.out.println("        | ");
+                System.out.println("        | ");
+                break;
+            case 6:
+                System.out.println("  _______ ");
+                System.out.println("  |     | ");
+                System.out.println("  |     | ");
+                System.out.println("  ●     | ");
+                System.out.println("        | ");
+                System.out.println("        | ");
+                break;
+            case 5:
+                System.out.println("  _______ ");
+                System.out.println("  |     | ");
+                System.out.println("  |     | ");
+                System.out.println("  ●     | ");
+                System.out.println("  |     | ");
+                System.out.println("        | ");
+                break;
+            case 4:
+                System.out.println("  _______ ");
+                System.out.println("  |     | ");
+                System.out.println("  |     | ");
+                System.out.println("  ●     | ");
+                System.out.println(" -|     | ");
+                System.out.println("        | ");
+                break;
+            case 3:
+                System.out.println("  _______ ");
+                System.out.println("  |     | ");
+                System.out.println("  |     | ");
+                System.out.println("  ●     | ");
+                System.out.println("--|--   | ");
+                System.out.println("        | ");
+                break;
+            case 2:
+                System.out.println("  _______ ");
+                System.out.println("  |     | ");
+                System.out.println("  |     | ");
+                System.out.println("  ●     | ");
+                System.out.println("--|--   | ");
+                System.out.println("  |     | ");
+                break;
+            case 1:
+                System.out.println("  _______ ");
+                System.out.println("  |     | ");
+                System.out.println("  |     | ");
+                System.out.println("  ●     | ");
+                System.out.println("--|--   | ");
+                System.out.println("  |     | ");
+                System.out.println("-----   | ");
+                break;
+        }
     }
 }
 
