@@ -1,5 +1,6 @@
 package com.hmproject.application;
 
+import com.hmproject.design.Design;
 import com.hmproject.game.MainGame;
 import com.hmproject.model.records.RecordDAO;
 import com.hmproject.model.records.RecordTO;
@@ -22,9 +23,15 @@ public class Application {
 
         MainGame game = new MainGame();
         RecordDAO recordDAO = new RecordDAO();
+        Design design = new Design();
+
+        design.StartHangman();
 
         do{
-            System.out.print("1. 플레이 / 2. 기록확인 / 3. 종료\n입력 : ");
+            System.out.println("----------------------------------------------------------------------------------------------------------");
+            System.out.print("1. 플레이\n2. 기록확인\n3. 종료\n");
+            System.out.println("----------------------------------------------------------------------------------------------------------");
+            System.out.print("입력 : ");
             menu = sc.nextInt();
 
             switch(menu){
