@@ -185,7 +185,7 @@ public class MainGame {
                     design_man(lives);
                 } else {
                     System.out.println("Wrong");
-                    lives += -1;
+                    lives -= 1;
                     design_man(lives);
                 }
 
