@@ -64,16 +64,35 @@ public class MainGame {
         String[] displayArr = new String[wArr.length];
 
         String letters = "";
-        rto.setStart(System.currentTimeMillis());
 
+        // 게임 시작
+        rto.setStart(System.currentTimeMillis());
         while (true) {
             boolean succeed = true;
 
             System.out.println("----------------------------------------------------------------------------------------------------------");
-            System.out.print("알파벳이나 '힌트' 혹은 '탈출' 을 입력하세요. > ");
+            System.out.print("알파벳을 입력하세요.(힌트사용: '힌트' / 중도포기: '탈출') > ");
             String input = scanner.next();
             System.out.println("----------------------------------------------------------------------------------------------------------");
-            if (input.equals("힌트")) {
+            if(input.equals("정답")){
+                System.out.print("경고! 신중하게 입력하세요! (한글이나 중복 입력에 대한 추가 기회가 없습니다.)\n> ");
+                input = scanner.next();
+
+                if(word.equals(input)){
+                    rto.setEnd(System.currentTimeMillis());
+                    rto.setSolved(true);
+                    rto.setCorrect(correct);
+                    rto.setHistory(letters.toCharArray());
+
+                    design.GameSuccess();
+                    System.out.println("정답입니다! 당신이 행맨을 살렸습니다!");
+                    break;
+                }else {
+                    System.out.println("틀렸습니다. 행맨이 교수대에 매달리고 있어요!");
+                    lives -= 1;
+                    design_man(lives);
+                }
+            }else if (input.equals("힌트")) {
                 if (hintCount >= 1) {
                     System.out.println("힌트 횟수를 초과했습니다.");
                     continue;
@@ -91,51 +110,66 @@ public class MainGame {
                 hintCount++;
                 continue;
             } else if (input.equals("탈출")) {
+                rto.setEnd(System.currentTimeMillis());
+                rto.setSolved(false);
+                rto.setCorrect(correct);
+                rto.setHistory(letters.toCharArray());
+
                 System.out.println("메인 화면으로 탈출합니다.");
                 break;
-            }
+            }else{
 
-            String letter = String.valueOf(input.charAt(0));
+                char charLetter = input.charAt(0);
+                String letter = "";
+                // 알파벳 입력 검사
+                if(Character.isAlphabetic(charLetter)){
+                    letter = String.valueOf(charLetter);
 
-            // 중복 입력 방지
-            if (!letters.contains(letter)) {
-                letters += letter;
+                    // 중복 입력 방지
+                    if (!letters.contains(letter)) {
+                        letters += letter;
 
-                if (word.contains(letter)) {
-                    System.out.println("맞았습니다! 행맨은 목숨을 잠깐이지만 부지하게 됐네요!");
-                    design_man(lives);
-                } else {
-                    System.out.println("틀렸습니다. 행맨이 교수대에 매달리고 있어요!");
-                    lives -= 1;
-                    design_man(lives);
-                }
+                        if (word.contains(letter)) {
+                            System.out.println("맞았습니다! 행맨은 목숨을 잠깐이지만 부지하게 됐네요!");
+                            design_man(lives);
+                        } else {
+                            System.out.println("틀렸습니다. 행맨이 교수대에 매달리고 있어요!");
+                            lives -= 1;
+                            design_man(lives);
+                        }
 
-                for(int i = 0; i < wArr.length; i++){
-                    if (correct[i] == 1) {
-                        System.out.print(wArr[i] + " ");
-                        displayArr[i] = String.valueOf(wArr[i]);
-                    } else if(wArr[i] == letter.charAt(0)){
-                        correct[i]++;
-                        System.out.print(wArr[i] + " ");
-                        displayArr[i] = String.valueOf(wArr[i]);
+                        for(int i = 0; i < wArr.length; i++){
+                            if (correct[i] == 1) {
+                                System.out.print(wArr[i] + " ");
+                                displayArr[i] = String.valueOf(wArr[i]);
+                            } else if(wArr[i] == letter.charAt(0)){
+                                correct[i]++;
+                                System.out.print(wArr[i] + " ");
+                                displayArr[i] = String.valueOf(wArr[i]);
+                            } else {
+                                System.out.print("_ ");
+                                succeed = false;
+                                displayArr[i] = "_";
+                            }
+                        }
                     } else {
-                        System.out.print("_ ");
-                        succeed = false;
-                        displayArr[i] = "_";
+                        System.out.println("이미 시도한 문자입니다.");
+                        continue;
                     }
+                }else{
+                    System.out.println("알파벳을 입력해주세요.");
+                    continue;
                 }
-            } else {
-                System.out.println("이미 시도한 문자입니다.");
-                continue;
-            }
 
-            System.out.println();
+                System.out.println();
+            }
 
             if (succeed) {
                 rto.setEnd(System.currentTimeMillis());
                 rto.setSolved(true);
                 rto.setCorrect(correct);
                 rto.setHistory(letters.toCharArray());
+
                 design.GameSuccess();
                 System.out.println("정답입니다! 당신이 행맨을 살렸습니다!");
                 break;
