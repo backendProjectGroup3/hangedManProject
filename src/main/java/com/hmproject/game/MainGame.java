@@ -20,7 +20,7 @@ public class MainGame {
         String[] longWords = new String[words.length];
         int shortIndex = 0;
         int longIndex = 0;
-        int lives = 7;
+        int lives = 9;
         int hintCount = 0;
 
         // 단어를 길이에 따라 분류
@@ -46,14 +46,14 @@ public class MainGame {
         }
 
         System.out.println("선택된 단어의 길이: " + word.length());
-        System.out.println("게임 시작! 단어를 맞혀보세요.");
+        System.out.println("게임 시작! 행맨을 살리고 싶다면 단어를 맞혀보세요.");
 
         rto.setDifficulty(difficulty);
         rto.setWord(word);
         int[] correct = new int[word.length()];
         char[] wArr = word.toCharArray();
 
-        String[] displayArr =new String[wArr.length];
+        String[] displayArr = new String[wArr.length];
 
         String letters = "";
         rto.setStart(System.currentTimeMillis());
@@ -90,10 +90,10 @@ public class MainGame {
                 letters += letter;
 
                 if (word.contains(letter)) {
-                    System.out.println("Correct");
+                    System.out.println("맞았습니다! 행맨은 목숨을 잠깐이지만 부지하게 됐네요!");
                     design_man(lives);
                 } else {
-                    System.out.println("Wrong");
+                    System.out.println("틀렸습니다. 행맨이 교수대에 매달리고 있어요!");
                     lives -= 1;
                     design_man(lives);
                 }
@@ -124,11 +124,12 @@ public class MainGame {
                 rto.setSolved(true);
                 rto.setCorrect(correct);
                 rto.setHistory(letters.toCharArray());
-                System.out.println("Success");
+                System.out.println("정답입니다! 당신이 행맨을 살렸습니다!");
                 break;
             }
             if (lives < 1) {
-                System.out.println("죽었습니다.");
+                System.out.println("행맨이 죽었습니다...");
+                System.out.println("정답은 " + word + "였습니다!");
                 break;
             }
         }
@@ -137,6 +138,14 @@ public class MainGame {
     }
     public void design_man(int life) {
         switch(life){
+            case 8:
+                System.out.println("  _______ ");
+                System.out.println("  |     | ");
+                System.out.println("        | ");
+                System.out.println("        | ");
+                System.out.println("        | ");
+                System.out.println("        | ");
+                break;
             case 7:
                 System.out.println("  _______ ");
                 System.out.println("  |     | ");
