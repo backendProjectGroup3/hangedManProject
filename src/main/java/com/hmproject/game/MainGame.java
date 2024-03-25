@@ -63,9 +63,9 @@ public class MainGame {
 
             System.out.println();
 
-            System.out.print("Input letter or 'hint' > ");
+            System.out.print("알파벳이나 '힌트' 혹은 '탈출' 을 입력하세요. > ");
             String input = scanner.next();
-            if (input.equals("hint")) {
+            if (input.equals("힌트")) {
                 if (hintCount >= 1) {
                     System.out.println("힌트 횟수를 초과했습니다.");
                     continue;
@@ -79,8 +79,12 @@ public class MainGame {
                     }
                 }
                 HintAlgo.provideHint(guessedLettersArr, word, lives);
+                design_man(lives);
                 hintCount++;
                 continue;
+            } else if (input.equals("탈출")) {
+                System.out.println("메인 화면으로 탈출합니다.");
+                break;
             }
 
             String letter = String.valueOf(input.charAt(0));

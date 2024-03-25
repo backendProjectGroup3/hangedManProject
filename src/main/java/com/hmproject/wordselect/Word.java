@@ -9,9 +9,9 @@ public class Word {
                 "avocado", "coconut", "lime", "mango", "papaya", "lychee", "durian",
                 "apricot", "tangerine", "cranberry", "nectarine", "guava", "grapefruit",
                 "boysenberry", "dragonfruit", "persimmon", "pomegranate", "rhubarb",
-                "jackfruit", "lemon", "lime", "mango", "Serendipity", "Ephemeral",
-                "Obfuscate", "cooperation","conscience","application","cilantro","elect",
-                "adaptable","handiwork", "bathe","query", "omniscient","blame"};
+                "jackfruit", "lemon", "Serendipity", "Ephemeral", "Obfuscate", "cooperation",
+                "conscience", "application", "cilantro", "elect", "adaptable","handiwork",
+                "bathe","query", "omniscient","blame"};
 
     }
 
