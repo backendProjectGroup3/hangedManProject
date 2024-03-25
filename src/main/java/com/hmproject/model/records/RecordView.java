@@ -49,20 +49,20 @@ public class RecordView {
                     sj = new StringJoiner("\t\t");
                 }
             }
-            System.out.println("--------------------------------------------------------------------");
+            System.out.println("----------------------------------------------------------------------------------------------------------");
             if(sb1.length() != 0){
-                System.out.println("[성공]\n번호\t\t난이도\t단어\t\t소요시간\t\t시작시간\t\t\t\t\t종료시간");
+                System.out.println("[성공]\n번호\t난이도\t단어\t소요시간\t 시작시간\t\t\t     종료시간");
                 System.out.println(sb1);
             }
             if(sb2.length() != 0){
-                System.out.println("[실패]\n번호\t\t난이도\t단어\t\t소요시간\t\t시작시간\t\t\t\t\t종료시간");
+                System.out.println("[실패]\n번호\t난이도\t단어\t소요시간\t 시작시간\t\t\t     종료시간");
                 System.out.println(sb2);
             }
-            System.out.println("--------------------------------------------------------------------");
-
+            System.out.println("----------------------------------------------------------------------------------------------------------");
             do{
-                System.out.print("1. 세부기록 조회\t9. 뒤로가기\n> ");
-
+                System.out.print("1. 세부기록 조회\n9. 뒤로가기\n");
+                System.out.println("----------------------------------------------------------------------------------------------------------");
+                System.out.print("입력: ");
                 try {
                     option = Integer.parseInt(sc.nextLine());
 
@@ -75,7 +75,10 @@ public class RecordView {
                 switch(option) {
                     case 1:
                         do {
-                            System.out.print("조회할 기록의 번호를 입력(취소: 숫자가 아닌 문자)\n> ");
+                            System.out.println("----------------------------------------------------------------------------------------------------------");
+                            System.out.println("조회할 기록의 번호를 입력(취소: 숫자가 아닌 문자)");
+                            System.out.println("----------------------------------------------------------------------------------------------------------");
+                            System.out.print("입력: ");
                             try {
                                 option = Integer.parseInt(sc.nextLine());
 
@@ -104,7 +107,7 @@ public class RecordView {
     }
 
     public void viewRecord(int seq){
-        System.out.println("--------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------------------------------------");
         try {
             RecordTO record = recordList.get(seq - 1);
 
@@ -114,6 +117,6 @@ public class RecordView {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("입력하신 번호의 기록이 존재하지 않습니다.");
         }
-        System.out.println("--------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------------------------------------");
     }
 }

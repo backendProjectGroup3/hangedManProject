@@ -1,5 +1,6 @@
 package com.hmproject.game;
 
+import com.hmproject.design.Design;
 import com.hmproject.hint.HintAlgo;
 import com.hmproject.model.records.RecordTO;
 import com.hmproject.wordselect.Word;
@@ -12,6 +13,7 @@ public class MainGame {
     public RecordTO launch() {
         Random random = new Random();
         Scanner scanner = new Scanner(System.in);
+        Design design = new Design();
 
         RecordTO rto = new RecordTO();
 
@@ -32,7 +34,11 @@ public class MainGame {
             }
         }
 
-        System.out.print("난이도 선택 (1: 6자 이하, 2: 6자 초과) : ");
+        System.out.println("---난이도 선택-------------------------------------------------------------------------------------------");
+        System.out.print("1. 6자 이하\n2. 6자 초과\n");
+        System.out.println("----------------------------------------------------------------------------------------------------------");
+        System.out.print("입력: ");
+
         int difficulty = scanner.nextInt();
         String word;
 
@@ -45,8 +51,10 @@ public class MainGame {
             return null; // 올바르지 않은 입력일 경우 null 을 반환하거나 적절한 예외 처리를 수행할 수 있습니다.
         }
 
-        System.out.println("선택된 단어의 길이: " + word.length());
-        System.out.println("게임 시작! 단어를 맞혀보세요.");
+//        System.out.println("선택된 단어의 길이: " + word.length());
+        design.GameStart();
+        System.out.println("(단어"+ word.length() +"개)");
+//        System.out.println(word);
 
         rto.setDifficulty(difficulty);
         rto.setWord(word);
@@ -61,10 +69,10 @@ public class MainGame {
         while (true) {
             boolean succeed = true;
 
-            System.out.println();
-
-            System.out.print("Input letter or 'hint' > ");
+            System.out.println("----------------------------------------------------------------------------------------------------------");
+            System.out.print("정답 입력 > ");
             String input = scanner.next();
+            System.out.println("----------------------------------------------------------------------------------------------------------");
             if (input.equals("hint")) {
                 if (hintCount >= 1) {
                     System.out.println("힌트 횟수를 초과했습니다.");
@@ -90,10 +98,10 @@ public class MainGame {
                 letters += letter;
 
                 if (word.contains(letter)) {
-                    System.out.println("Correct");
+                    System.out.println("정답!!");
                     design_man(lives);
                 } else {
-                    System.out.println("Wrong");
+                    System.out.println("오답!!");
                     lives -= 1;
                     design_man(lives);
                 }
@@ -124,11 +132,11 @@ public class MainGame {
                 rto.setSolved(true);
                 rto.setCorrect(correct);
                 rto.setHistory(letters.toCharArray());
-                System.out.println("Success");
+                design.GameSuccess();
                 break;
             }
             if (lives < 1) {
-                System.out.println("죽었습니다.");
+                design.StopHangman();
                 break;
             }
         }
