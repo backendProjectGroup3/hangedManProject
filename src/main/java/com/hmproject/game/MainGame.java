@@ -42,6 +42,7 @@ public class MainGame {
         int difficulty = scanner.nextInt();
         String word;
 
+
         if (difficulty == 1) {
             word = shortWords[random.nextInt(shortIndex)];
         } else if (difficulty == 2) {
@@ -151,6 +152,14 @@ public class MainGame {
     }
     public void design_man(int life) {
         switch(life){
+            case 9:
+                System.out.println("  _______ ");
+                System.out.println("        | ");
+                System.out.println("        | ");
+                System.out.println("        | ");
+                System.out.println("        | ");
+                System.out.println("        | ");
+                break;
             case 8:
                 System.out.println("  _______ ");
                 System.out.println("  |     | ");
