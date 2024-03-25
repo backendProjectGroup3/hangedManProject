@@ -1,14 +1,12 @@
 package com.hmproject.application;
 
-import com.hmproject.game.Maingame;
+import com.hmproject.game.MainGame;
 import com.hmproject.model.records.RecordDAO;
 import com.hmproject.model.records.RecordTO;
 import com.hmproject.model.records.RecordView;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.StringJoiner;
 
 public class Application {
 
@@ -22,7 +20,7 @@ public class Application {
 
         int menu = 0;
 
-        Maingame game = new Maingame();
+        MainGame game = new MainGame();
         RecordDAO recordDAO = new RecordDAO();
 
         do{
