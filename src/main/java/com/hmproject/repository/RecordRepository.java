@@ -19,7 +19,11 @@ public class RecordRepository {
     // 기록 한 개 선택
     public RecordTO select(int seq){
 
-        return RECORD_LIST.get(seq - 1);
+        try {
+            return RECORD_LIST.get(seq);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
 
     // 기록 입력

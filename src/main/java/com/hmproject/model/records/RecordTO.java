@@ -11,7 +11,7 @@ public class RecordTO {
     private int difficulty;
     private String word;
     private int[] correct;
-    private char[] incorrect;
+    private char[] history;
     private String time;
     private String stime;
     private String etime;

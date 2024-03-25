@@ -3,29 +3,27 @@ package com.hmproject.application;
 import com.hmproject.game.Maingame;
 import com.hmproject.model.records.RecordDAO;
 import com.hmproject.model.records.RecordTO;
+import com.hmproject.model.records.RecordView;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.StringJoiner;
 
 public class Application {
 
-    private static Maingame game;
-    private static RecordDAO recordDAO;
-    static{
-        game = new Maingame();
-        recordDAO = new RecordDAO();
-    }
-
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
+        RecordView recordView = null;
         ArrayList<RecordTO> recordList = null;
-        RecordTO result = null;
+        RecordTO record = null;
 
         int menu = 0;
 
+        Maingame game = new Maingame();
+        RecordDAO recordDAO = new RecordDAO();
 
         do{
             System.out.print("1. 플레이 / 2. 기록확인 / 9. 종료\n입력 : ");
@@ -33,47 +31,19 @@ public class Application {
 
             switch(menu){
                 case 1 :
-                    result = game.launch();
+                    record = game.launch();
 
-                    int flag = recordDAO.registerRecord(result);
+                    int flag = recordDAO.registerRecord(record);
                     if(flag == 1){
                         System.out.println("게임 결과 등록에 실패했습니다.");
                     }
                     break;
                 case 2 :
                     recordList = recordDAO.getList();
-                    StringJoiner sb1 = new StringJoiner("\t\t");
-                    StringJoiner sb2 = new StringJoiner("\t\t");
 
-                    //
-                    for(RecordTO record : recordList){
-                        if(record.isSolved()){
-                            sb1.add(record.getSeq() + "")
-                                    .add(record.getDifficulty() + "")
-                                    .add(record.getWord())
-                                    .add(record.getTime())
-                                    .add(record.getStime())
-                                    .add(record.getEtime())
-                                    .add(System.lineSeparator());
-                        }else{
-                            sb2.add(record.getSeq() + "")
-                                    .add(record.getDifficulty() + "")
-                                    .add(record.getWord())
-                                    .add(record.getTime())
-                                    .add(record.getStime())
-                                    .add(record.getEtime())
-                                    .add(System.lineSeparator());
-                        }
-                    }
+                    recordView = new RecordView(recordList);
+                    recordView.viewList();
 
-                    if(sb1.length() != 0){
-                        System.out.println("[성공]\n번호\t\t난이도\t단어\t\t소요시간\t\t시작시간\t\t\t\t\t종료시간");
-                        System.out.println(sb1);
-                    }
-                    if(sb2.length() != 0){
-                        System.out.println("[실패]\n번호\t\t난이도\t단어\t\t소요시간\t\t시작시간\t\t\t\t\t종료시간");
-                        System.out.println(sb2);
-                    }
                     break;
                 case 9:
                     System.out.println("종료합니다.");
@@ -83,5 +53,6 @@ public class Application {
             }
 
         }while(menu != 9);
+        sc.close();
     }
 }

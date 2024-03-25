@@ -19,8 +19,7 @@ public class RecordDAO {
     }
 
     public RecordTO getRecord(int seq){
-        // seq RECORD_LIST.size()넘는지 체크 필요
-        RecordTO data = rp.select(seq);
+        RecordTO data = rp.select(seq - 1);
 
         return data;
     }
