@@ -8,6 +8,7 @@ import com.hmproject.model.records.RecordView;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Application {
 
@@ -28,11 +29,14 @@ public class Application {
         design.StartHangman();
 
         do{
-            System.out.println("----------------------------------------------------------------------------------------------------------");
-            System.out.print("1. 플레이\n2. 기록확인\n3. 종료\n");
-            System.out.println("----------------------------------------------------------------------------------------------------------");
-            System.out.print("입력 : ");
-            menu = sc.nextInt();
+            try {
+                System.out.print("1. 플레이 / 2. 기록확인 / 3. 종료\n입력 : ");
+                menu = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("숫자를 입력하세요.");
+                sc.next();
+                continue;
+            }
 
             switch(menu){
                 case 1 :
