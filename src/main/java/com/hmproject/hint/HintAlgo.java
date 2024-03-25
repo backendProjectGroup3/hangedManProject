@@ -29,8 +29,7 @@ public class HintAlgo {
             ch = word.charAt(emptyIndex);
         }
 
-        System.out.println("hint: " + emptyIndex + " index is " + ch
-        );
+        System.out.println("hint: " + emptyIndex + " index is " + ch );
 
 
 
