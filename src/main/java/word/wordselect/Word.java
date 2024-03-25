@@ -8,8 +8,8 @@ public class Word {
             "avocado", "coconut", "lime", "mango", "papaya", "lychee", "durian",
             "apricot", "tangerine", "cranberry", "nectarine", "guava", "grapefruit",
             "dragonfruit", "persimmon", "pomegranate", "rhubarb",
-            "jackfruit", "lemon", "lime", "mango", "banana", "peach", "plum",
-            "pear", "cherry", "grape","Serendipity","Ephemeral","Obfuscate"};
+            "jackfruit", "lemon", "lime", "mango", "grape","Serendipity","Ephemeral","Obfuscate",
+            "applicaion","second","cooperation","gossip","clever","cilantro","service","newstart"};
 
         String[] longWords = new String[words.length];
         String[] shortWords = new String[words.length];
