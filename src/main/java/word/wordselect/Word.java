@@ -7,8 +7,8 @@ public class Word {
                 "peach", "plum", "pear", "cherry", "melon", "fig", "date", "kiwi",
                 "avocado", "coconut", "lime", "mango", "papaya", "lychee", "durian",
                 "apricot", "tangerine", "cranberry", "nectarine", "guava", "grapefruit",
-                "boysenberry", "dragonfruit", "persimmon", "pomegranate", "rhubarb",
-                "jackfruit", "lemon", "lime", "mango", "banana", "peach", "plum",
+                 "dragonfruit", "persimmon", "pomegranate", "rhubarb",
+               "jackfruit", "lemon", "lime", "mango", "banana", "peach", "plum",
                 "pear", "cherry", "grape","Serendipity","Ephemeral","Obfuscate"};
 
         String[] longWords = new String[words.length];
