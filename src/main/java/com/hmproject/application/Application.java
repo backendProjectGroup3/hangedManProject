@@ -1,14 +1,12 @@
 package com.hmproject.application;
 
-import com.hmproject.game.Maingame;
+import com.hmproject.game.MainGame;
 import com.hmproject.model.records.RecordDAO;
 import com.hmproject.model.records.RecordTO;
 import com.hmproject.model.records.RecordView;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.StringJoiner;
 
 public class Application {
 
@@ -22,11 +20,11 @@ public class Application {
 
         int menu = 0;
 
-        Maingame game = new Maingame();
+        MainGame game = new MainGame();
         RecordDAO recordDAO = new RecordDAO();
 
         do{
-            System.out.print("1. 플레이 / 2. 기록확인 / 9. 종료\n입력 : ");
+            System.out.print("1. 플레이 / 2. 기록확인 / 3. 종료\n입력 : ");
             menu = sc.nextInt();
 
             switch(menu){
@@ -45,14 +43,14 @@ public class Application {
                     recordView.viewList();
 
                     break;
-                case 9:
+                case 3:
                     System.out.println("종료합니다.");
                     break;
                 default :
                     System.out.println("올바른 번호를 입력하세요.");
             }
 
-        }while(menu != 9);
+        }while(menu != 3);
         sc.close();
     }
 }

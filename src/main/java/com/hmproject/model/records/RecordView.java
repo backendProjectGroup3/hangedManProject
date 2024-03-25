@@ -1,7 +1,6 @@
 package com.hmproject.model.records;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.StringJoiner;
 
@@ -18,39 +17,46 @@ public class RecordView {
         if (!recordList.isEmpty()) {
             Scanner sc = new Scanner(System.in);
 
-            StringJoiner sj1 = new StringJoiner("\t\t");
-            StringJoiner sj2 = new StringJoiner("\t\t");
+            StringBuilder sb1 = new StringBuilder();
+            StringBuilder sb2 = new StringBuilder();
+
+            StringJoiner sj = new StringJoiner("\t\t");
 
             int option = 0;
 
             //
             for(RecordTO record : recordList){
                 if(record.isSolved()){
-                    sj1.add(record.getSeq() + "")
+                    sj.add(record.getSeq() + "")
                             .add(record.getDifficulty() + "")
                             .add(record.getWord())
                             .add(record.getTime())
                             .add(record.getStime())
                             .add(record.getEtime())
                             .add(System.lineSeparator());
+                    sb1.append(sj);
+                    sj = new StringJoiner("\t\t");
+
                 }else{
-                    sj2.add(record.getSeq() + "")
+                    sj.add(record.getSeq() + "")
                             .add(record.getDifficulty() + "")
                             .add(record.getWord())
                             .add(record.getTime())
                             .add(record.getStime())
                             .add(record.getEtime())
                             .add(System.lineSeparator());
+                    sb2.append(sj);
+                    sj = new StringJoiner("\t\t");
                 }
             }
             System.out.println("--------------------------------------------------------------------");
-            if(sj1.length() != 0){
+            if(sb1.length() != 0){
                 System.out.println("[성공]\n번호\t\t난이도\t단어\t\t소요시간\t\t시작시간\t\t\t\t\t종료시간");
-                System.out.println(sj1);
+                System.out.println(sb1);
             }
-            if(sj2.length() != 0){
+            if(sb2.length() != 0){
                 System.out.println("[실패]\n번호\t\t난이도\t단어\t\t소요시간\t\t시작시간\t\t\t\t\t종료시간");
-                System.out.println(sj2);
+                System.out.println(sb2);
             }
             System.out.println("--------------------------------------------------------------------");
 

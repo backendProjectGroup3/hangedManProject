@@ -1,12 +1,11 @@
-package word.hint;
+package com.hmproject.hint;
 
-public class hintalgo {
+public class HintAlgo {
 
 
     public static void provideHint(String[] guessedLetters, String word, int lives){
 
         int emptyCount = 0;
-
 
         int emptyIndex =-1;
 

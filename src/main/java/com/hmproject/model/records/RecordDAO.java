@@ -19,9 +19,8 @@ public class RecordDAO {
     }
 
     public RecordTO getRecord(int seq){
-        RecordTO data = rp.select(seq - 1);
 
-        return data;
+        return rp.select(seq - 1);
     }
 
     public int registerRecord(RecordTO rto){
