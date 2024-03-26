@@ -43,7 +43,7 @@ HangManProject는 오직 JAVA 언어로만 콘솔을 통해 출력되는 1인 �
 | **김태영** | **도영익** | **김현수** | **안홍영** |
 | :------: |  :------: | :------: | :------: |
 | [<img src="https://avatars.githubusercontent.com/u/64628733?v=4" height=150 width=150> <br/> @blackdemon129](https://github.com/blackdemon129) | [<img src="https://avatars.githubusercontent.com/u/133643805?v=4" height=150 width=150> <br/> @do0ik](https://github.com/do0ik) | [<img src="https://avatars.githubusercontent.com/u/130562778?v=4" height=150 width=150> <br/> @syongsyong6035](https://github.com/syongsyong6035) | [<img src="https://avatars.githubusercontent.com/u/96677474?v=4" height=150 width=150> <br/> @inredzero](https://github.com/inredzero) |
-| 🎮[Game](https://github.com/backendProjectGroup3/hangedManProject/tree/feature/mainGame) | 📝[Record](https://github.com/backendProjectGroup3/hangedManProject/tree/feature/record) | ⭐[Word](https://github.com/backendProjectGroup3/hangedManProject/tree/feature-word) | 🎨[Design](https://github.com/backendProjectGroup3/hangedManProject/tree/feature/design5) |
+| 🎮[Game](https://github.com/backendProjectGroup3/hangedManProject/tree/feature/mainGame) | 📝[Record](https://github.com/backendProjectGroup3/hangedManProject/tree/feature/record) | ⭐[Word](https://github.com/backendProjectGroup3/hangedManProject/tree/feature-word) | 🎨[Design](https://github.com/backendProjectGroup3/hangedManProject/tree/feature/design6) |
 
 </div>
 
