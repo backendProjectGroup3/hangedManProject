@@ -108,8 +108,8 @@ public class RecordView {
         try {
             RecordTO record = recordList.get(seq - 1);
 
-            for(char ch : record.getHistory()){
-                System.out.println(ch);
+            for(String str : record.getHistory()){
+                System.out.println(str);
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("입력하신 번호의 기록이 존재하지 않습니다.");

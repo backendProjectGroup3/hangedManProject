@@ -1,10 +1,11 @@
 package com.hmproject.game;
 
 import com.hmproject.design.Design;
-import com.hmproject.hint.HintAlgo;
+import com.hmproject.hint.Hint;
 import com.hmproject.model.records.RecordTO;
-import com.hmproject.wordselect.Word;
+import com.hmproject.repository.WordRepository;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -17,119 +18,99 @@ public class MainGame {
 
         RecordTO rto = new RecordTO();
 
-        String[] words = Word.getWords(); // 첫번째 코드의 Word 클래스에서 단어 배열 받아오기
-        String[] shortWords = new String[words.length];
-        String[] longWords = new String[words.length];
-        int shortIndex = 0;
-        int longIndex = 0;
         int lives = 9;
         int hintCount = 0;
 
-        // 단어를 길이에 따라 분류
-        for (String word : words) {
-            if (word.length() <= 6) {
-                shortWords[shortIndex++] = word;
+        int[] correct = null;
+        ArrayList<String> history = null;
+
+        int difficulty = 0;
+        String word = "";
+        do{
+            System.out.println("---난이도 선택-------------------------------------------------------------------------------------------");
+            System.out.print("1. 6자 이하\n2. 6자 초과\n");
+            System.out.println("----------------------------------------------------------------------------------------------------------");
+            System.out.print("입력: ");
+            difficulty = Integer.parseInt(scanner.nextLine());
+
+
+            if (difficulty == 1) {
+                word = WordRepository.selectNormal();
+            } else if (difficulty == 2) {
+                word = WordRepository.selectHard();
             } else {
-                longWords[longIndex++] = word;
+                System.out.println("올바른 난이도를 선택해주세요.");
             }
-        }
-
-        System.out.println("---난이도 선택-------------------------------------------------------------------------------------------");
-        System.out.print("1. 6자 이하\n2. 6자 초과\n");
-        System.out.println("----------------------------------------------------------------------------------------------------------");
-        System.out.print("입력: ");
-
-        int difficulty = scanner.nextInt();
-        String word;
-
-
-        if (difficulty == 1) {
-            word = shortWords[random.nextInt(shortIndex)];
-        } else if (difficulty == 2) {
-            word = longWords[random.nextInt(longIndex)];
-        } else {
-            System.out.println("올바른 난이도를 선택해주세요.");
-            return null; // 올바르지 않은 입력일 경우 null 을 반환하거나 적절한 예외 처리를 수행할 수 있습니다.
-        }
+        }while(difficulty != 1 && difficulty != 2);
 
         design.GameStart();
         System.out.println("선택된 단어의 길이: " + word.length());
         System.out.println("게임 시작! 행맨을 살리고 싶다면 단어를 맞혀보세요.");
 
-        rto.setDifficulty(difficulty);
-        rto.setWord(word);
-        int[] correct = new int[word.length()];
+        correct = new int[word.length()];
+        history = new ArrayList<>();
+
         char[] wArr = word.toCharArray();
 
-        String[] displayArr = new String[wArr.length];
-
-        String letters = "";
-
+        boolean succeed = false;
         // 게임 시작
         rto.setStart(System.currentTimeMillis());
-        while (true) {
-            boolean succeed = true;
+        do {
 
             System.out.println("----------------------------------------------------------------------------------------------------------");
-            System.out.print("알파벳을 입력하세요.(힌트사용: '힌트' / 중도포기: '탈출') > ");
-            String input = scanner.next();
+            System.out.print("알파벳을 입력하세요.(정답유추 : 'try' / 힌트사용: 'hint' / 중도포기: 'escape')");
+            System.out.print("\n남은 목숨 : " + lives);
+            if(!history.isEmpty()){
+                System.out.print("\t\t입력 현황 : ");
+                for(String tmp : history){
+                    System.out.print(tmp + " ");
+                }
+            }
+            System.out.print("\n> ");
+            String input = scanner.nextLine().toLowerCase();
             System.out.println("----------------------------------------------------------------------------------------------------------");
-            if(input.equals("정답")){
-                System.out.print("경고! 신중하게 입력하세요! (한글이나 중복 입력에 대한 추가 기회가 없습니다.)\n> ");
-                input = scanner.next();
+
+            if(input.equals("try")){
+                System.out.print("경고! 신중하게 입력하세요! (영문 외 문자열이나 중복 입력에 대한 추가 기회가 없습니다.)\n> ");
+                input = scanner.nextLine().toLowerCase();
+
+                history.add(input);
 
                 if(word.equals(input)){
                     rto.setEnd(System.currentTimeMillis());
-                    rto.setSolved(true);
-                    rto.setCorrect(correct);
-                    rto.setHistory(letters.toCharArray());
-
-                    design.GameSuccess();
-                    System.out.println("정답입니다! 당신이 행맨을 살렸습니다!");
-                    break;
+                    succeed = true;
                 }else {
                     System.out.println("틀렸습니다. 행맨이 교수대에 매달리고 있어요!");
                     lives -= 1;
-                    design_man(lives);
                 }
-            }else if (input.equals("힌트")) {
+
+            }else if (input.equals("hint")) {
                 if (hintCount >= 1) {
                     System.out.println("힌트 횟수를 초과했습니다.");
                     continue;
                 }
-                String[] guessedLettersArr = new String[displayArr.length];
-                for (int i = 0; i < displayArr.length; i++) {
-                    if (displayArr[i] != null) {
-                        guessedLettersArr[i] = displayArr[i];
-                    } else {
-                        guessedLettersArr[i] = "_";
-                    }
-                }
-                HintAlgo.provideHint(guessedLettersArr, word, lives);
-                design_man(lives);
+
+                Hint.provideHint(correct, wArr, lives);
                 hintCount++;
                 continue;
-            } else if (input.equals("탈출")) {
-                rto.setEnd(System.currentTimeMillis());
-                rto.setSolved(false);
-                rto.setCorrect(correct);
-                rto.setHistory(letters.toCharArray());
+
+            } else if (input.equals("escape")) {
 
                 System.out.println("메인 화면으로 탈출합니다.");
                 break;
-            }else{
 
+            }else{
                 char charLetter = input.charAt(0);
-                String letter = "";
+
                 // 알파벳 입력 검사
-                if(Character.isAlphabetic(charLetter)){
-                    letter = String.valueOf(charLetter);
+                if(97 <= charLetter && charLetter <= 122){
+                    String strLetter = String.valueOf(charLetter);
 
                     // 중복 입력 방지
-                    if (!letters.contains(letter)) {
-                        letters += letter;
+                    if (!history.contains(strLetter)) {
+                        history.add(strLetter);
 
-                        if (word.contains(letter)) {
+                        if (word.contains(strLetter)) {
                             System.out.println("맞았습니다! 행맨은 목숨을 잠깐이지만 부지하게 됐네요!");
                             design_man(lives);
                         } else {
@@ -137,19 +118,18 @@ public class MainGame {
                             lives -= 1;
                             design_man(lives);
                         }
-
+                        succeed = true;
                         for(int i = 0; i < wArr.length; i++){
                             if (correct[i] == 1) {
                                 System.out.print(wArr[i] + " ");
-                                displayArr[i] = String.valueOf(wArr[i]);
-                            } else if(wArr[i] == letter.charAt(0)){
+
+                            } else if(wArr[i] == strLetter.charAt(0)){
                                 correct[i]++;
                                 System.out.print(wArr[i] + " ");
-                                displayArr[i] = String.valueOf(wArr[i]);
+
                             } else {
                                 System.out.print("_ ");
                                 succeed = false;
-                                displayArr[i] = "_";
                             }
                         }
                     } else {
@@ -164,15 +144,10 @@ public class MainGame {
                 System.out.println();
             }
 
-            if (succeed) {
-                rto.setEnd(System.currentTimeMillis());
-                rto.setSolved(true);
-                rto.setCorrect(correct);
-                rto.setHistory(letters.toCharArray());
-
+            if(succeed){
                 design.GameSuccess();
                 System.out.println("정답입니다! 당신이 행맨을 살렸습니다!");
-                break;
+
             }
             if (lives < 1) {
                 design.StopHangman();
@@ -180,10 +155,18 @@ public class MainGame {
                 System.out.println("정답은 " + word + "였습니다!");
                 break;
             }
-        }
+        }while(!succeed);
+        rto.setEnd(System.currentTimeMillis());
+        rto.setSolved(succeed);
+        rto.setDifficulty(difficulty);
+        rto.setWord(word);
+        rto.setCorrect(correct);
+        rto.setHistory(history.toArray(new String[0]));
 
         return rto;
     }
+
+
     public void design_man(int life) {
         switch(life){
             case 9:
@@ -194,6 +177,7 @@ public class MainGame {
                 System.out.println("        | ");
                 System.out.println("        | ");
                 break;
+
             case 8:
                 System.out.println("  _______ ");
                 System.out.println("  |     | ");
@@ -231,7 +215,7 @@ public class MainGame {
                 System.out.println("  |     | ");
                 System.out.println("  |     | ");
                 System.out.println("  ●     | ");
-                System.out.println(" -|     | ");
+                System.out.println("--|     | ");
                 System.out.println("        | ");
                 break;
             case 3:
@@ -256,8 +240,15 @@ public class MainGame {
                 System.out.println("  |     | ");
                 System.out.println("  ●     | ");
                 System.out.println("--|--   | ");
+                System.out.println("__|     | ");
+                break;
+            case 0:
+                System.out.println("  _______ ");
                 System.out.println("  |     | ");
-                System.out.println("-----   | ");
+                System.out.println("  |     | ");
+                System.out.println("  ●     | ");
+                System.out.println("--|--   | ");
+                System.out.println("__|__   | ");
                 break;
         }
     }

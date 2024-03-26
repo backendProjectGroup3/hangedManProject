@@ -33,6 +33,7 @@ public class Application {
             try {
                 System.out.print("1. 플레이 / 2. 기록확인 / 3. 종료\n입력 : ");
                 menu = sc.nextInt();
+                sc.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("숫자를 입력하세요.");
                 sc.next();

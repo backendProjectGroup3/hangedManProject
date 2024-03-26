@@ -6,7 +6,7 @@ public class RecordTO {
     private int difficulty;
     private String word;
     private int[] correct;
-    private char[] history;
+    private String[] history;
     private String time;
     private String stime;
     private String etime;
@@ -46,11 +46,11 @@ public class RecordTO {
         this.correct = correct;
     }
 
-    public char[] getHistory() {
+    public String[] getHistory() {
         return history;
     }
 
-    public void setHistory(char[] history) {
+    public void setHistory(String[] history) {
         this.history = history;
     }
 
