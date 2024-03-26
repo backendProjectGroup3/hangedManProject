@@ -82,6 +82,7 @@ public class MainGame {
                 }else {
                     System.out.println("틀렸습니다. 행맨이 교수대에 매달리고 있어요!");
                     lives -= 1;
+                    design_man(lives);
                 }
 
             }else if (input.equals("hint")) {
