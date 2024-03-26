@@ -71,15 +71,14 @@ HangManProject는 오직 JAVA 언어로만 콘솔을 통해 출력되는 1인 �
      │                    ├── game
      │                    │      └── MainGame.class
      │                    ├── hint
-     │                    │      └── HintAlgo
+     │                    │      └── Hint.class
      │                    ├── model.records
      │                    │            ├── RecordDAO.class
      │                    │            ├── RecordTO.class
      │                    │            └── RecordView.class
-     │                    ├── repository
-     │                    │       └── RecordRepository.class
-     │                    ├── wordselect
-     │                            └── Word.class
+     │                    └── repository
+     │                            ├── RecordRepository.class
+     │                            └── WordRepository.class
      │
      │
      │
