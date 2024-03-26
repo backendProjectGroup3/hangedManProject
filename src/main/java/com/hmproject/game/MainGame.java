@@ -153,6 +153,7 @@ public class MainGame {
                 design.StopHangman();
                 System.out.println("행맨이 죽었습니다...");
                 System.out.println("정답은 " + word + "였습니다!");
+                System.out.println("----------------------------------------------------------------------------------------------------------");
                 break;
             }
         }while(!succeed);

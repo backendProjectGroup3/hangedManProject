@@ -27,10 +27,10 @@ public class Application {
         RecordDAO recordDAO = new RecordDAO();
         Design design = new Design();
 
-        design.StartHangman();
 
         do{
             try {
+                design.StartHangman();
                 System.out.print("1. 플레이 / 2. 기록확인 / 3. 종료\n입력 : ");
                 menu = sc.nextInt();
                 sc.nextLine();
