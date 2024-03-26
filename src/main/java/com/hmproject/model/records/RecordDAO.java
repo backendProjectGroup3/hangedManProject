@@ -8,20 +8,22 @@ import java.util.Date;
 
 public class RecordDAO {
 
-    private RecordRepository rp;
+    private RecordRepository recordMapper;
 
     public RecordDAO(){
-        rp = new RecordRepository();
+        recordMapper = new RecordRepository();
     }
 
-    public ArrayList<RecordTO> getList(){
-        return rp.selectAll();
+    public ArrayList<RecordTO> getRecordList(){
+        return recordMapper.selectAll();
     }
 
+    /*
     public RecordTO getRecord(int seq){
 
-        return rp.select(seq - 1);
+        return recordMapper.select(seq - 1);
     }
+     */
 
     public int registerRecord(RecordTO rto){
         int flag = 1;
@@ -49,7 +51,7 @@ public class RecordDAO {
         }
         rto.setTime(time);
 
-        if(rp.insert(rto)){
+        if(recordMapper.insert(rto)){
             flag = 0;
         }
         return flag;

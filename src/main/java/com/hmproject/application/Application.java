@@ -16,13 +16,14 @@ public class Application {
 
         Scanner sc = new Scanner(System.in);
 
-        RecordView recordView = null;
+        MainGame game = new MainGame();
+        RecordView recordView = new RecordView();
+
         ArrayList<RecordTO> recordList = null;
         RecordTO record = null;
 
         int menu = 0;
 
-        MainGame game = new MainGame();
         RecordDAO recordDAO = new RecordDAO();
         Design design = new Design();
 
@@ -48,10 +49,8 @@ public class Application {
                     }
                     break;
                 case 2 :
-                    recordList = recordDAO.getList();
-
-                    recordView = new RecordView(recordList);
-                    recordView.viewList();
+                    recordList = recordDAO.getRecordList();
+                    recordView.viewList(recordList);
 
                     break;
                 case 3:

@@ -7,14 +7,11 @@ import java.util.StringJoiner;
 public class RecordView {
     private ArrayList<RecordTO> recordList;
 
-    public RecordView(ArrayList<RecordTO> recordList) {
-        this.recordList = recordList;
-    }
-
     // 기록 전체 출력
-    public void viewList(){
+    public void viewList(ArrayList<RecordTO> recordList){
+        this.recordList = recordList;
 
-        if (!recordList.isEmpty()) {
+        if (!this.recordList.isEmpty()) {
             Scanner sc = new Scanner(System.in);
 
             StringBuilder sb1 = new StringBuilder();
@@ -25,7 +22,7 @@ public class RecordView {
             int option = 0;
 
             //
-            for(RecordTO record : recordList){
+            for(RecordTO record : this.recordList){
                 if(record.isSolved()){
                     sj.add(record.getSeq() + "")
                             .add(record.getDifficulty() + "")
@@ -50,11 +47,11 @@ public class RecordView {
                 }
             }
             System.out.println("----------------------------------------------------------------------------------------------------------");
-            if(sb1.length() != 0){
+            if(!sb1.isEmpty()){
                 System.out.println("[성공]\n번호\t난이도\t단어\t소요시간\t 시작시간\t\t\t     종료시간");
                 System.out.println(sb1);
             }
-            if(sb2.length() != 0){
+            if(!sb2.isEmpty()){
                 System.out.println("[실패]\n번호\t난이도\t단어\t소요시간\t 시작시간\t\t\t     종료시간");
                 System.out.println(sb2);
             }
