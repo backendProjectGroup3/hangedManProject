@@ -1,7 +1,7 @@
 ---
 name: Basic Issue Template
 about: Suggest an idea for this project
-title: "[# 이슈번호] 이슈이름"
+title: 이슈 요약 내용
 labels: "⭐️feature⭐️"
 assignees: ''
 
